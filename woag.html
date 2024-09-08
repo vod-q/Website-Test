@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" id="top">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script defer src="script.js"></script>
+    <title>Goofy Goober Industries</title>
+</head>
+<body>
+    <header class="main-header">
+        <nav class="nav slide-in-top">
+            <div class="container">
+                <a href="woag.html">
+                    <img src="./assets/favicon32x32.png" alt="GGI" class="logo" />
+                </a>
+                <ul class="nav-list">
+                    <li><a href="about.html" class="nav-links hover-effect">About Us</a></li>
+                    <li><a href="machinery.html" class="nav-links hover-effect">Machinery</a></li>
+                    <li><a href="#services" class="nav-links hover-effect">Services</a></li>
+                    <li><a href="#news" class="nav-links hover-effect">News</a></li>
+                    <li><a href="#contact" class="nav-links hover-effect">Contact</a></li>
+                </ul>
+                <div class="togglecontainer">
+                    <span class="sun-logo">&#x2600;</span>
+                    <span class="moon-logo">&#x1F319;</span>
+                    <div id="transition-circle"></div>
+                </div>                
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero section-transition">
+            <div id="particles-js"></div>
+            <div class="parallax-bg"></div>
+            <div class="container">
+                <article class="hero-text bounce-in-left">
+                    <p class="subtitle">Welcome.</p>
+                    <h1 class="name">Goofy Goober Industries</h1>
+                    <p class="intro">Innovating the future with cutting-edge solutions.</p>
+                    <div class="hero-btn-container">
+                        <a href="#services" class="btn">
+                            <span>Explore Our Services</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+
+        <!-- Services Section -->
+        <section id="services" class="services-section section-transition">
+            <div class="container" data-aos="fade-up">
+                <h2 class="title">Our High-Tech Services</h2>
+                <div class="services">
+                    <article class="service">
+                        <i class="fas fa-robot"></i>
+                        <h3>AI & Automation</h3>
+                        <p>Implementing advanced AI-driven automation solutions to streamline operations.</p>
+                    </article>
+                    <article class="service">
+                        <i class="fas fa-cloud"></i>
+                        <h3>Cloud Integration</h3>
+                        <p>Seamlessly integrating cloud-based technologies to boost efficiency and collaboration.</p>
+                    </article>
+                    <article class="service">
+                        <i class="fas fa-code"></i>
+                        <h3>Software Development</h3>
+                        <p>Crafting innovative software tailored to meet unique business needs.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest News Section -->
+        <section id="news" class="news-section section-transition">
+            <div class="container" data-aos="fade-right">
+                <h2 class="title">Latest News</h2>
+                <div class="news-items">
+                    <article class="news-item">
+                        <h3>New Robotics Lab</h3>
+                        <p>Goofy Goober Industries opens a state-of-the-art robotics lab to push innovation further.</p>
+                    </article>
+                    <article class="news-item">
+                        <h3>Partnership with Tech Giants</h3>
+                        <p>We’ve entered a groundbreaking partnership with leading tech companies to develop AI tools.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section id="team" class="team-section section-transition">
+            <div class="container" data-aos="fade-up">
+                <h2 class="title">Meet the Team</h2>
+                <p class="subtitle">The brains and power behind Goofy Goober Industries</p>
+                <div class="team-grid">
+                    <!-- Team Member 1 -->
+                    <article class="team-member" data-name="EnderReaper64" data-title="Founder & CEO" data-bio="EnderReaper64 is the visionary behind Goofy Goober Industries, leading the company to technological heights since its inception." data-skills="AI, Robotics, Leadership">
+                        <img src="https://via.placeholder.com/150" alt="EnderReaper64" class="team-photo">
+                        <h3>EnderReaper64</h3>
+                        <p>Founder & CEO</p>
+                    </article>
+                    <!-- Add other team members similarly -->
+                </div>
+            </div>
+        
+            <!-- Single Modal (Reused for all members) -->
+            <div id="team-modal" class="team-modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2 id="modal-name"></h2>
+                    <p id="modal-title"></p>
+                    <p id="modal-bio"></p>
+                    <p><strong>Skills:</strong> <span id="modal-skills"></span></p>
+                </div>
+            </div>
+        </section>
+        
+        
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section section-transition">
+            <div class="container" data-aos="fade-up">
+                <h2 class="title">Get in Touch</h2>
+                <form class="contact-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+
+                    <button type="submit" class="btn submit-btn">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; <span id="date"></span> Goofy Goober Industries</p>
+            <a href="#top" class="top">Scroll to top</a>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('date').textContent = new Date().getFullYear();
+    </script>
+    <!-- Floating Action Button (FAB) -->
+<div id="fab" class="fab">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+</body>
+</html>

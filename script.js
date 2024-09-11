@@ -46,12 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-//Loader
-window.addEventListener("load", () => {
-    const loader = document.getElementById('page-loader');
-    loader.classList.add('hidden');
-});
-
 //FAB
 // Show/Hide FAB based on scroll position
 const fab = document.getElementById('fab');
@@ -71,15 +65,53 @@ fab.addEventListener('click', () => {
     });
 });
 
-// Custom Cursor
-const cursor = document.createElement('div');
-cursor.classList.add('cursor');
-document.body.appendChild(cursor);
+document.addEventListener("DOMContentLoaded", () => {
+    // Custom cursor logic
+    const cursor = document.querySelector(".custom-cursor");
+    document.addEventListener("mousemove", (e) => {
+        cursor.style.top = `${e.clientY}px`;
+        cursor.style.left = `${e.clientX}px`;
+    });
 
-document.addEventListener('mousemove', (e) => {
-    cursor.style.top = `${e.clientY}px`;
-    cursor.style.left = `${e.clientX}px`;
+    // Scroll-based animations (using Intersection Observer for better performance)
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("aos-animate");
+            }
+        });
+    }, { threshold: 0.2 });
+
+    // Hover effect for links and buttons
+const hoverTargets = document.querySelectorAll('a, button, .btn, article, .togglecontainer');
+hoverTargets.forEach(target => {
+    target.addEventListener('mouseenter', () => {
+        cursor.classList.add('cursor-hover');
+    });
+    target.addEventListener('mouseleave', () => {
+        cursor.classList.remove('cursor-hover');
+    });
 });
+
+    document.querySelectorAll("[data-aos]").forEach(section => {
+        observer.observe(section);
+    });
+
+    // Particle generation
+    const particleContainer = document.createElement('div');
+    particleContainer.classList.add('particles-background');
+    document.body.appendChild(particleContainer);
+
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        particleContainer.appendChild(particle);
+    }
+});
+
 
 // Hover effect for links and buttons
 const hoverTargets = document.querySelectorAll('a, button, .btn');
@@ -90,23 +122,6 @@ hoverTargets.forEach(target => {
     target.addEventListener('mouseleave', () => {
         cursor.classList.remove('cursor-hover');
     });
-});
-
-// Particle trail following the cursor
-const particleTrail = [];
-
-document.addEventListener('mousemove', (e) => {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    document.body.appendChild(particle);
-
-    particle.style.left = `${e.clientX}px`;
-    particle.style.top = `${e.clientY}px`;
-
-    // Fade and remove particles after a delay
-    setTimeout(() => {
-        particle.remove();
-    }, 1000);
 });
 
 // Particle styling
@@ -155,100 +170,91 @@ sections.forEach(section => {
     sectionObserver.observe(section);
 });
 
+// Add interactivity to machinery cards
+const machineryCards = document.querySelectorAll('.machinery-card');
 
-//Particle JS
-particlesJS('particles-js', {
-    "particles": {
-        "number": {
-            "value": 100,
-            "density": {
-                "enable": true,
-                "value_area": 800
-            }
-        },
-        "color": {
-            "value": "#1e66f5"
-        },
-        "shape": {
-            "type": "circle",
-            "stroke": {
-                "width": 0,
-                "color": "#000000"
-            },
-        },
-        "opacity": {
-            "value": 0.9
-        },
-        "size": {
-            "value": 3,
-            "random": true
-        },
-        "line_linked": {
-            "enable": true,
-            "distance": 150,
-            "color": "#f9e2af",
-            "opacity": 0.5,
-            "width": 1
-        },
-        "move": {
-            "enable": true,
-            "speed": 6,
-            "direction": "none",
-            "random": false
-        }
-    },
-    "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-            "onhover": {
-                "enable": true,
-                "mode": "grab"
-            },
-            "onclick": {
-                "enable": true,
-                "mode": "push"
-            }
-        }
-    },
-    "retina_detect": true
+machineryCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const machineName = card.dataset.machine;
+        alert(`Learn more about ${machineName}. Full specs coming soon!`);
+    });
 });
 
-// 3D Model Viewer for Machinery
-let scene, camera, renderer, model;
 
-function init3DViewer() {
-    const container = document.getElementById('3d-model-viewer');
-
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-    container.appendChild(renderer.domElement);
-
-    const light = new THREE.AmbientLight(0x404040);
-    scene.add(light);
-
-    // Load the 3D model
-    const loader = new THREE.GLTFLoader();
-    loader.load('path_to_3d_model/machine.gltf', function (gltf) {
-        model = gltf.scene;
-        scene.add(model);
-        model.rotation.y = Math.PI; // Adjust orientation if needed
-        animate();
-    });
-
-    camera.position.z = 5;
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-    model.rotation.y += 0.01; // Slow rotation for effect
-    renderer.render(scene, camera);
-}
-
-init3DViewer();
-
-
+//Particle JS
+// Initialize Particles.js with a more colorful and dynamic setup
+particlesJS('particles-js', {
+    "particles": {
+      "number": {
+        "value": 150,  // Increase the number of particles
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": ["#f72585", "#7209b7", "#3a0ca3", "#4361ee", "#4cc9f0"]  // Bizarre colors
+      },
+      "shape": {
+        "type": ["circle", "triangle", "polygon"],  // Multiple shapes
+        "polygon": {
+          "nb_sides": 6  // Polygon shape with 6 sides
+        },
+        "stroke": {
+          "width": 2,
+          "color": "#ffffff"
+        }
+      },
+      "opacity": {
+        "value": 0.9,
+        "random": true
+      },
+      "size": {
+        "value": 6,  // Bigger particle size for visual impact
+        "random": true
+      },
+      "line_linked": {
+        "enable": true,
+        "distance": 150,
+        "color": "#ffffff",  // Link particles with white lines
+        "opacity": 0.6,
+        "width": 2
+      },
+      "move": {
+        "enable": true,
+        "speed": 6,  // Speed up the particles
+        "direction": "none",
+        "random": true,  // Randomize movement
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false
+      }
+    },
+    "interactivity": {
+      "detect_on": "canvas",
+      "events": {
+        "onhover": {
+          "enable": true,
+          "mode": "repulse"  // Particles repulse when hovered
+        },
+        "onclick": {
+          "enable": true,
+          "mode": "push"  // Push particles when clicked
+        }
+      },
+      "modes": {
+        "repulse": {
+          "distance": 150,
+          "duration": 0.4
+        },
+        "push": {
+          "particles_nb": 4  // Push 4 particles on click
+        }
+      }
+    },
+    "retina_detect": true
+  });
+  
 // Character modal popup
 const characterCards = document.querySelectorAll('.character-card');
 const modal = document.getElementById('character-modal');
@@ -276,75 +282,85 @@ window.addEventListener('click', (event) => {
 
 
 // FAQ Collapse/Expand
-const faqItems = document.querySelectorAll('.faq-item');
+document.addEventListener("DOMContentLoaded", () => {
+    const faqQuestions = document.querySelectorAll(".faq-question");
 
-faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    
-    question.addEventListener('click', () => {
-        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    faqQuestions.forEach(question => {
+        question.addEventListener("click", () => {
+            const answer = question.nextElementSibling;
+
+            // Toggle the 'open' class to control expansion
+            answer.classList.toggle('open');
+        });
     });
 });
 
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Light/Dark Mode Toggle
     const toggleContainer = document.querySelector(".togglecontainer");
     const sunLogo = document.querySelector(".sun-logo");
     const moonLogo = document.querySelector(".moon-logo");
     const body = document.querySelector("body");
     const circle = document.getElementById('transition-circle');
 
-    // Load the user's preference from local storage
-    const isLightMode = localStorage.getItem("lightMode") === "true";
-    
-    // Set the theme based on stored preference without triggering animation
-    if (isLightMode) {
+    // Load user's theme preference from localStorage
+    const savedTheme = localStorage.getItem("theme");
+
+    if (savedTheme === "light") {
         body.classList.add("light");
-        sunLogo.classList.add("animate-sun");
-        moonLogo.classList.add("animate-moon");
-        circle.style.transform = "scale(0)"; // Prevent initial animation
     }
 
     toggleContainer.addEventListener("click", () => {
-        // Get button position
-        const buttonRect = toggleContainer.getBoundingClientRect();
-        const buttonCenterX = buttonRect.left + buttonRect.width / 2;
-        const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+        body.classList.toggle("light");
 
-        // Set circle's position based on button
-        circle.style.top = `${buttonCenterY}px`;
-        circle.style.left = `${buttonCenterX}px`;
+        // Save theme to localStorage
+        const theme = body.classList.contains("light") ? "light" : "dark";
+        localStorage.setItem("theme", theme);
+    });
 
-        // Trigger the dark mode transition
-        if (circle.style.transform === "scale(1)") {
-            // If already scaled, retract
-            circle.style.transform = "scale(0)";
-        } else {
-            // Expand the circle
-            circle.style.transform = "scale(1)";
+    // Chart.js Initialization
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+            datasets: [{
+                label: 'Machines Deployed (in thousands)',
+                data: [10, 30, 45, 60, 75, 100, 130, 180],
+                backgroundColor: 'rgba(137, 220, 235, 0.5)',
+                borderColor: 'rgba(137, 220, 235, 1)',
+                borderWidth: 2,
+                fill: true,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
+    });
 
-        // Toggle the light mode after the transition starts
-        setTimeout(() => {
-            sunLogo.classList.toggle("animate-sun");
-            moonLogo.classList.toggle("animate-moon");
-            body.classList.toggle("light");
-            localStorage.setItem("lightMode", !isLightMode);
-        }, 200);
+    // FAQ Collapse/Expand
+    const faqItems = document.querySelectorAll('.faq-item');
+
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const answer = item.querySelector('.faq-answer');
+
+        // Initially hide the answer
+        answer.style.display = 'none';
+
+        question.addEventListener('click', () => {
+            const isVisible = answer.style.display === 'block';
+            answer.style.display = isVisible ? 'none' : 'block';
+        });
     });
 });
-const themeToggle = document.querySelector('.togglecontainer');
-const transitionCircle = document.querySelector('#transition-circle');
 
-themeToggle.addEventListener('click', () => {
-    transitionCircle.classList.add('animate');
-    setTimeout(() => {
-      transitionCircle.classList.remove('animate');
-      // change the theme here
-    }, 500); // adjust the timeout to match the animation duration
-  });
 
 // Set the current year in the footer
 const date = document.getElementById('date');
@@ -370,6 +386,31 @@ const toggleMobileMenu = () => {
 navLinks.forEach(link => link.addEventListener('click', toggleMobileMenu));
 hamburger.addEventListener('click', toggleMobileMenu);
 
+// Basic chatbot functionality
+const chatHistory = document.getElementById('chat-history');
+const chatInput = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
 
-// Initialize AOS (Animate on Scroll) library
-AOS.init();
+sendBtn.addEventListener('click', () => {
+    const userMessage = chatInput.value;
+    addMessage('user', userMessage);
+
+    // Simulated chatbot response
+    setTimeout(() => {
+        addMessage('bot', 'Let me check that for you...');
+    }, 1000);
+});
+
+function addMessage(sender, message) {
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+    messageDiv.textContent = message;
+    chatHistory.appendChild(messageDiv);
+    chatInput.value = '';
+}
+
+// AOS initialization
+AOS.init({
+    duration: 800,
+    once: false
+});

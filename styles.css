@@ -17,7 +17,7 @@
 
 	/* style for scrollbar */
 	scrollbar-width: thin;
-	scrollbar-color: var(--z-clr) rgb(49, 50, 68);
+	scrollbar-color: var(--accent-clr) var(--primary-clr);
 	scrollbar-width: thin;
 	scrollbar-gutter: stable;
 }
@@ -77,6 +77,13 @@ body.light #transition-circle {
     background-color: var(--primary-clr);
 }
 
+/* Expanding circle animation */
+body.transition #transition-circle {
+    width: 200vmax;
+    height: 200vmax;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 
 /*Latte Colour Palette*/
 .light {
@@ -122,12 +129,6 @@ body.light #transition-circle {
     left: 0;
     z-index: -1; /* Ensure it's behind the content */
     background-color: (--primary-clr); /* Optional: Customize background color */
-}
-
-
-body {
-  transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
-  transition-delay: 0.2s;
 }
 
 /* style webkit browsers (chrome, edge) scrollbar */
@@ -412,6 +413,7 @@ small {
 .nav {
 	width: 100%;
 	padding: 0 1rem;
+    z-index: 9;
 }
 
 .nav .container {
@@ -475,6 +477,10 @@ small {
 .social-nav a:hover {
 	background: var(--accent-other-clr);
 	color: var(--secondary-clr);
+}
+
+article {
+    pointer-events: all;
 }
 
 .animated-background {
@@ -542,6 +548,7 @@ small {
 	display: grid;
 	place-items: center;
 	gap: 5rem;
+    pointer-events: none;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
@@ -576,6 +583,7 @@ small {
     padding: 1.2rem 3rem;
     font-size: 1.5rem;
     letter-spacing: 1px;
+    pointer-events: all;
     text-transform: uppercase;
     border-radius: 5rem;
     position: relative;
@@ -626,104 +634,6 @@ small {
 .hero-btn-container .btn:hover::after {
     opacity: 1;
 }
-
-/* Mobile view adjustments */
-@media screen and (max-width: 768px) {
-    /* General adjustments */
-    :root {
-        --section-mt: 4rem;
-        font-size: 8px;
-    }
-
-    .togglecontainer {
-        width: 40px;
-        height: 40px;
-    }
-
-    .sun-logo, .moon-logo {
-        font-size: 20px;
-    }
-
-    .nav .container {
-        padding: 0.5rem 1rem;
-        flex-direction: column;
-    }
-
-    .nav-list {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2rem;
-    }
-
-    .nav-links {
-        font-size: 1.2rem;
-    }
-
-    .social-nav {
-        margin-top: 1rem;
-    }
-
-    .hero .container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .hero img {
-        max-width: 250px;
-    }
-
-    .hero-text {
-        text-align: center;
-    }
-
-    .about-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .about-text {
-        text-align: center;
-    }
-
-    .about-image img {
-        margin-top: 2rem;
-        max-width: 250px;
-    }
-
-    .projects {
-        gap: 6rem;
-    }
-
-    .project {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .project-links {
-        column-gap: 2rem;
-    }
-
-    .my-skills ul {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .about-us, .timeline-section, .projects-section {
-        padding: 2rem 1rem;
-    }
-
-    .faq-question, .faq-answer {
-        font-size: 1.2rem;
-    }
-
-    .loader .spinner {
-        width: 60px;
-        height: 60px;
-        border: 6px solid var(--secondary-clr);
-        border-top: 6px solid var(--accent-clr);
-    }
-}
-
-
 
 /***********************
     HERO TEXT SPACING FIX
@@ -787,23 +697,10 @@ small {
     color: var(--main-clr);
 }
 
-.subtitle {
-    font-size: 1.8rem;
-    color: var(--accent-clr);
-    margin-bottom: 1rem;
-    letter-spacing: 0.5px;
-}
-
-.title {
-    font-size: 3rem;
-    margin-bottom: 1.5rem;
-    color: var(--accent-other-clr);
-}
-
 .about-description {
     font-size: 1.6rem;
     line-height: 1.8;
-    color: var(--other-clr);
+    color: var(--main-clr);
     margin-bottom: 1.5rem;
 }
 
@@ -833,33 +730,241 @@ small {
 }
 
 
-/***********************
-	FAQ SECTION
-*************************/
 /* FAQ Section */
-.faq-item {
-    margin: 1rem 0;
+.faq-section {
+    padding: 4rem 2rem;
+    background-color: var(--secondary-clr);
+    text-align: center;
+}
+
+.faq {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .faq-question {
+    background-color: var(--primary-clr);
+    color: var(--main-clr);
+    border: none;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: left;
     cursor: pointer;
-    background-color: var(--secondary-clr);
-    padding: 1rem;
-    border-radius: 10px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
     transition: background-color 0.3s ease;
 }
 
 .faq-question:hover {
     background-color: var(--accent-clr);
-	color: var(--primary-clr);
 }
 
 .faq-answer {
-    display: none;
-    padding: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    background-color: var(--secondary-clr);
+    padding: 0 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    color: var(--other-clr);
+    transition: max-height 0.3s ease;
+}
+
+.faq-answer.open {
+    max-height: 200px;  /* Adjust this based on content length */
+    padding: 1rem;      /* Add padding when expanded */
+}
+
+/* Hero Section with Parallax */
+.lore-hero {
+    position: relative;
+    height: 500px;
+    color: var(--accent-clr);
+    text-align: center;
+    background-color: var(--secondary-clr);
+}
+
+.lore-hero .parallax-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.dev/svgjs' width='1440' height='560' preserveAspectRatio='none' viewBox='0 0 1440 560'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1000%26quot%3b)' fill='none'%3e%3crect width='1440' height='560' x='0' y='0' fill='%230e2a47'%3e%3c/rect%3e%3cpath d='M5.23 -62.9L70.18 -25.4L70.18 49.6L5.23 87.1L-59.72 49.6L-59.72 -25.4zM70.18 49.6L135.14 87.1L135.14 162.1L70.18 199.6L5.23 162.1L5.23 87.1zM5.23 162.1L70.18 199.6L70.18 274.6L5.23 312.1L-59.72 274.6L-59.72 199.6zM135.14 -62.9L200.09 -25.4L200.09 49.6L135.14 87.1L70.18 49.6L70.18 -25.4zM200.09 49.6L265.05 87.1L265.05 162.1L200.09 199.6L135.14 162.1L135.14 87.1zM135.14 162.1L200.09 199.6L200.09 274.6L135.14 312.1L70.18 274.6L70.18 199.6zM135.14 387.1L200.09 424.6L200.09 499.6L135.14 537.1L70.18 499.6L70.18 424.6zM330 49.6L394.95 87.1L394.95 162.1L330 199.6L265.05 162.1L265.05 87.1zM265.05 387.1L330 424.6L330 499.6L265.05 537.1L200.09 499.6L200.09 424.6zM459.91 274.6L524.86 312.1L524.86 387.1L459.91 424.6L394.95 387.1L394.95 312.1zM459.91 499.6L524.86 537.1L524.86 612.1L459.91 649.6L394.95 612.1L394.95 537.1zM524.86 -62.9L589.81 -25.4L589.81 49.6L524.86 87.1L459.91 49.6L459.91 -25.4zM524.86 162.1L589.81 199.6L589.81 274.6L524.86 312.1L459.91 274.6L459.91 199.6zM589.81 499.6L654.77 537.1L654.77 612.1L589.81 649.6L524.86 612.1L524.86 537.1zM654.77 387.1L719.72 424.6L719.72 499.6L654.77 537.1L589.81 499.6L589.81 424.6zM784.67 -62.9L849.63 -25.4L849.63 49.6L784.67 87.1L719.72 49.6L719.72 -25.4zM784.67 162.1L849.63 199.6L849.63 274.6L784.67 312.1L719.72 274.6L719.72 199.6zM784.67 387.1L849.63 424.6L849.63 499.6L784.67 537.1L719.72 499.6L719.72 424.6zM849.63 499.6L914.58 537.1L914.58 612.1L849.63 649.6L784.67 612.1L784.67 537.1zM914.58 -62.9L979.54 -25.4L979.54 49.6L914.58 87.1L849.63 49.6L849.63 -25.4zM979.54 49.6L1044.49 87.1L1044.49 162.1L979.54 199.6L914.58 162.1L914.58 87.1zM979.54 274.6L1044.49 312.1L1044.49 387.1L979.54 424.6L914.58 387.1L914.58 312.1zM1109.44 274.6L1174.4 312.1L1174.4 387.1L1109.44 424.6L1044.49 387.1L1044.49 312.1zM1044.49 387.1L1109.44 424.6L1109.44 499.6L1044.49 537.1L979.54 499.6L979.54 424.6zM1174.4 -62.9L1239.35 -25.4L1239.35 49.6L1174.4 87.1L1109.44 49.6L1109.44 -25.4zM1174.4 162.1L1239.35 199.6L1239.35 274.6L1174.4 312.1L1109.44 274.6L1109.44 199.6zM1239.35 499.6L1304.3 537.1L1304.3 612.1L1239.35 649.6L1174.4 612.1L1174.4 537.1zM1369.26 274.6L1434.21 312.1L1434.21 387.1L1369.26 424.6L1304.31 387.1L1304.31 312.1zM1304.31 387.1L1369.26 424.6L1369.26 499.6L1304.31 537.1L1239.35 499.6L1239.35 424.6zM1499.17 49.6L1564.12 87.1L1564.12 162.1L1499.17 199.6L1434.21 162.1L1434.21 87.1zM1434.21 162.1L1499.17 199.6L1499.17 274.6L1434.21 312.1L1369.26 274.6L1369.26 199.6zM1499.17 274.6L1564.12 312.1L1564.12 387.1L1499.17 424.6L1434.21 387.1L1434.21 312.1zM1499.17 499.6L1564.12 537.1L1564.12 612.1L1499.17 649.6L1434.21 612.1L1434.21 537.1z' stroke='%2303305d' stroke-width='2'%3e%3c/path%3e%3cpath d='M-2.27 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-2.27 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-67.22 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-67.22 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-2.27 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-2.27 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-67.22 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM-67.22 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM257.55 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM257.55 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM192.59 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM127.64 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM62.68 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM322.5 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM322.5 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM257.55 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM322.5 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM322.5 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM257.55 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 649.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM387.45 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM517.36 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM452.41 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM647.27 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM647.27 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 649.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM647.27 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM582.31 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM712.22 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM842.13 649.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM777.17 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1036.99 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1036.99 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1036.99 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1036.99 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM907.08 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1036.99 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM972.04 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 -62.9 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 -25.4 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1101.94 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1296.8 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1296.8 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 649.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1166.9 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1361.76 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1361.76 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1296.81 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1296.81 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1361.76 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1296.81 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1231.85 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 49.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 162.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 87.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 274.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1361.76 199.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 312.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 387.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 424.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 499.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1556.62 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1491.67 649.6 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 612.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0zM1426.71 537.1 a7.5 7.5 0 1 0 15 0 a7.5 7.5 0 1 0 -15 0z' fill='%2303305d'%3e%3c/path%3e%3cpath d='M0.41 147.2L43.71 172.2L43.71 222.2L0.41 247.2L-42.89 222.2L-42.89 172.2zM0.41 297.2L43.71 322.2L43.71 372.2L0.41 397.2L-42.89 372.2L-42.89 322.2zM43.71 522.2L87.02 547.2L87.02 597.2L43.71 622.2L0.41 597.2L0.41 547.2zM87.02 447.2L130.32 472.2L130.32 522.2L87.02 547.2L43.71 522.2L43.71 472.2zM130.32 522.2L173.62 547.2L173.62 597.2L130.32 622.2L87.02 597.2L87.02 547.2zM173.62 147.2L216.92 172.2L216.92 222.2L173.62 247.2L130.32 222.2L130.32 172.2zM173.62 297.2L216.92 322.2L216.92 372.2L173.62 397.2L130.32 372.2L130.32 322.2zM173.62 447.2L216.92 472.2L216.92 522.2L173.62 547.2L130.32 522.2L130.32 472.2zM260.23 -2.8L303.53 22.2L303.53 72.2L260.23 97.2L216.92 72.2L216.92 22.2zM260.23 447.2L303.53 472.2L303.53 522.2L260.23 547.2L216.92 522.2L216.92 472.2zM390.13 222.2L433.44 247.2L433.44 297.2L390.13 322.2L346.83 297.2L346.83 247.2zM346.83 447.2L390.13 472.2L390.13 522.2L346.83 547.2L303.53 522.2L303.53 472.2zM433.44 297.2L476.74 322.2L476.74 372.2L433.44 397.2L390.13 372.2L390.13 322.2zM476.74 372.2L520.04 397.2L520.04 447.2L476.74 472.2L433.44 447.2L433.44 397.2zM563.34 72.2L606.64 97.2L606.64 147.2L563.34 172.2L520.04 147.2L520.04 97.2zM649.95 222.2L693.25 247.2L693.25 297.2L649.95 322.2L606.64 297.2L606.64 247.2zM606.64 447.2L649.95 472.2L649.95 522.2L606.64 547.2L563.34 522.2L563.34 472.2zM649.95 522.2L693.25 547.2L693.25 597.2L649.95 622.2L606.64 597.2L606.64 547.2zM693.25 147.2L736.55 172.2L736.55 222.2L693.25 247.2L649.95 222.2L649.95 172.2zM779.86 -2.8L823.16 22.2L823.16 72.2L779.86 97.2L736.55 72.2L736.55 22.2zM779.86 147.2L823.16 172.2L823.16 222.2L779.86 247.2L736.55 222.2L736.55 172.2zM823.16 522.2L866.46 547.2L866.46 597.2L823.16 622.2L779.86 597.2L779.86 547.2zM909.76 222.2L953.07 247.2L953.07 297.2L909.76 322.2L866.46 297.2L866.46 247.2zM909.76 372.2L953.07 397.2L953.07 447.2L909.76 472.2L866.46 447.2L866.46 397.2zM953.07 147.2L996.37 172.2L996.37 222.2L953.07 247.2L909.76 222.2L909.76 172.2zM953.07 447.2L996.37 472.2L996.37 522.2L953.07 547.2L909.76 522.2L909.76 472.2zM1039.67 -2.8L1082.97 22.2L1082.97 72.2L1039.67 97.2L996.37 72.2L996.37 22.2zM1082.97 72.2L1126.28 97.2L1126.28 147.2L1082.97 172.2L1039.67 147.2L1039.67 97.2zM1039.67 147.2L1082.97 172.2L1082.97 222.2L1039.67 247.2L996.37 222.2L996.37 172.2zM1126.28 297.2L1169.58 322.2L1169.58 372.2L1126.28 397.2L1082.97 372.2L1082.97 322.2zM1169.58 372.2L1212.88 397.2L1212.88 447.2L1169.58 472.2L1126.28 447.2L1126.28 397.2zM1126.28 447.2L1169.58 472.2L1169.58 522.2L1126.28 547.2L1082.97 522.2L1082.97 472.2zM1256.18 222.2L1299.49 247.2L1299.49 297.2L1256.18 322.2L1212.88 297.2L1212.88 247.2zM1256.18 372.2L1299.49 397.2L1299.49 447.2L1256.18 472.2L1212.88 447.2L1212.88 397.2zM1256.18 522.2L1299.49 547.2L1299.49 597.2L1256.18 622.2L1212.88 597.2L1212.88 547.2zM1342.79 222.2L1386.09 247.2L1386.09 297.2L1342.79 322.2L1299.49 297.2L1299.49 247.2zM1299.49 447.2L1342.79 472.2L1342.79 522.2L1299.49 547.2L1256.18 522.2L1256.18 472.2zM1429.39 222.2L1472.7 247.2L1472.7 297.2L1429.39 322.2L1386.09 297.2L1386.09 247.2z' stroke='rgba(6%2c 80%2c 156%2c 0.93)' stroke-width='2'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1000'%3e%3crect width='1440' height='560' fill='white'%3e%3c/rect%3e%3c/mask%3e%3c/defs%3e%3c/svg%3e");
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: -9999;
+}
+
+.lore-hero .title {
+    font-size: 3.5rem;
+    margin-top: 5rem;
+}
+
+.lore-hero p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Lore Timeline */
+.lore-timeline {
     background-color: var(--primary-clr);
+    padding: 4rem 1rem;
+}
+
+.lore-timeline .lore-event {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    align-items: center;
+}
+
+.lore-timeline .lore-event.reverse {
+    flex-direction: row-reverse;
+}
+
+.lore-event .event-content {
+    flex: 1;
+    background-color: var(--secondary-clr);
+    padding: 2rem;
     border-radius: 10px;
-    margin-top: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.lore-event .event-content h3 {
+    font-size: 2.5rem;
+    color: var(--accent-clr);
+    margin-bottom: 1rem;
+}
+
+.lore-event .event-content p {
+    font-size: 1.4rem;
+    color: var(--main-clr);
+}
+
+.lore-event .event-image {
+    flex: 1;
+}
+
+.lore-event .event-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* General Styles */
+body {
+    font-family: 'Fira Sans', sans-serif;
+    background-color: var(--primary-clr);
+    color: var(--main-clr);
+}
+
+/* Hero Section */
+.hero-section {
+    background-color: var(--secondary-clr);
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.hero-section .title {
+    font-size: 3rem;
+    color: var(--accent-clr);
+}
+
+/* Machinery Section */
+.machinery-section {
+    padding: 4rem 1rem;
+    background-color: var(--secondary-clr);
+    text-align: center;
+}
+
+.machinery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.machinery-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.machinery-card img {
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.machinery-card:hover img {
+    transform: scale(1.05);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1rem;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.machinery-card:hover .card-overlay {
+    transform: translateY(0);
+}
+
+/* Brochures Section */
+.brochures-section {
+    background-color: var(--primary-clr);
+    padding: 4rem 1rem;
+    text-align: center;
+
+}
+
+.brochure-links .btn {
+    margin: 1rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent-clr);
+    color: var(--primary-clr);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.brochure-links{
+    margin-top: 12px;
+}
+
+.brochure-links .btn:hover {
+    background-color: var(--accent-other-clr);
+}
+
+/* Comparison Section */
+.comparison-section {
+    background-color: var(--secondary-clr);
+    padding: 4rem 1rem;
+    text-align: center;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.comparison-table th, .comparison-table td {
+    border: 1px solid var(--main-clr);
+    padding: 1rem;
+}
+
+.comparison-table th {
+    background-color: var(--accent-clr);
+    color: var(--primary-clr);
 }
 
 
@@ -1254,7 +1359,7 @@ small {
 
 .news-item:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);  /* Subtle orange glow */
+    box-shadow: 0 10px 30px var(--accent-clr);  /* Subtle orange glow */
 }
 
 .news-item h3 {
@@ -1402,12 +1507,53 @@ small {
     transform: translateY(0);
 }
 
-#3d-model-viewer {
-    width: 100%;
-    height: 500px;
+/*******************
+   Machinery Section
+*******************/
+/* Machinery Section */
+.machinery-section {
+    margin-top: 4rem;
+    padding: 4rem 1rem;
     background-color: var(--secondary-clr);
-    border-radius: 10px;
-    margin-top: 2rem;
+}
+
+.machinery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.machinery-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease;
+}
+
+.machinery-card img {
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.machinery-card:hover img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.machinery-card:hover .card-overlay {
+    transform: translateY(0);
 }
 
 
@@ -1644,6 +1790,27 @@ small {
 		justify-content: center;
 	}
 
+
+	/* Performance Section */
+.performance-section {
+    padding: 4rem 1rem;
+    background-color: var(--primary-clr);
+    text-align: center;
+}
+
+.performance-section .title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-clr);
+}
+
+#performanceChart {
+    max-width: 100%;
+    height: 400px;
+    margin: 0 auto;
+}
+
+
 	/* hamburger menu */
 	.hamburger {
 		width: 25px;
@@ -1760,9 +1927,10 @@ small {
 
 .fab i {
     font-size: 1.5rem;
+    bottom: -20px;
+    right: -20px;
+    position: relative;
 }
-
-
 
 /* Parallax Background */
 .parallax-bg {
@@ -1778,25 +1946,66 @@ small {
     z-index: -2;
 }
 
-
-
-/* Custom Cursor */
-.cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
+/***********************
+    CUSTOM CURSOR
+************************/
+.custom-cursor {
     width: 20px;
     height: 20px;
-    background-color: var(--accent-clr);
+    border: 2px solid var(--accent-clr);
     border-radius: 50%;
+    position: fixed;
     pointer-events: none;
-    z-index: 10000;
+    z-index: 1000;
     transform: translate(-50%, -50%);
     transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
 }
 
-.cursor.cursor-hover {
-    width: 40px;
-    height: 40px;
-    background-color: var(--accent-other-clr);
+.custom-cursor.cursor-hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 30px;
+    height: 30px;
+}
+
+/***********************
+    SCROLL-BASED ANIMATIONS
+************************/
+[data-aos] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+[data-aos].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/***********************
+    PARTICLE BACKGROUND
+************************/
+.particles-background {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    background-color: var(--primary-clr);
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-clr);
+    border-radius: 50%;
+    animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0); }
 }

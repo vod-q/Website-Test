@@ -1,99 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" id="top">
+
 <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lore | Goofy Goober Industries</title>
+
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+    <!-- External JavaScript for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 </head>
+
 <body>
+    <div class="custom-cursor"></div>
     <header class="main-header">
         <nav class="nav slide-in-top">
             <div class="container">
                 <a href="woag.html">
-                    <img src="./assets/ggi.webp" alt="GGI Logo" class="logo" />
+                    <img src="./assets/favicon32x32.png" alt="GGI" class="logo" />
                 </a>
                 <ul class="nav-list">
-                    <li><a href="woag.html" class="nav-links hover-effect">Home</a></li>
                     <li><a href="about.html" class="nav-links hover-effect">About Us</a></li>
-                    <li><a href="lore.html" class="nav-links hover-effect">Lore</a></li>
                     <li><a href="machinery.html" class="nav-links hover-effect">Machinery</a></li>
+                    <li><a href="#services" class="nav-links hover-effect">Services</a></li>
+                    <li><a href="#news" class="nav-links hover-effect">News</a></li>
+                    <li><a href="#contact" class="nav-links hover-effect">Contact</a></li>
                 </ul>
+                <div class="togglecontainer">
+                    <span class="sun-logo">&#x2600;</span>
+                    <span class="moon-logo">&#x1F319;</span>
+                    <div id="transition-circle"></div>
+                </div>                             
             </div>
         </nav>
     </header>
 
-    <main id="main-content">
-        <section class="about-me" id="lore">
-            <div class="container" data-aos="fade-up">
-                <img src="./assets/image-43.png" alt="Company Lore" />
-                <article>
-                    <p class="subtitle">Our Story</p>
-                    <h2 class="title">The Legend of Goofy Goober Industries</h2>
-                    <p>
-                        Once upon a time in a small garage, the dream of creating groundbreaking technology was born. Through determination, innovation, and a little bit of goofiness, Goofy Goober Industries emerged as a tech leader.
-                    </p>
-                    <br>
-                    <p>
-                        The Goofy Goober Industries (GGI) is a major team and primary antagonist in the IGoByLotOfNames GregTech cinematic universe. It was initially founded in late 2022 by EnderReaper64 as a minor player in the Project Towny event. Since then, the GGI has branched out to over a hundred members, and gained major military and economic sway in the Gregic political landscape.
-                    </p>
-                    <br>
-                    <p>
-                        Our lore spans decades of challenges, victories, and endless curiosity. Join us on this adventure as we continue to shape the future of tech.
-                    </p>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <section id="character-bios" class="character-bios-section">
+    <!-- Hero Section -->
+     <main id="main-content">
+    <section id="lore-hero" class="lore-hero">
+        <div class="parallax-bg"></div>
         <div class="container">
-            <h2 class="title">Meet the Legends</h2>
-            <div class="character-grid">
-                <!-- Character 1 -->
-                <div class="character-card" data-name="EnderReaper64" data-bio="Founder and CEO. A visionary leader who pushed Goofy Goober Industries to the top.">
-                    <img src="https://via.placeholder.com/150" alt="EnderReaper64">
-                    <h3>EnderReaper64</h3>
-                </div>
-                <!-- More characters -->
-            </div>
-        </div>
-        
-        <!-- Character Modal -->
-        <div id="character-modal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2 id="modal-name"></h2>
-                <p id="modal-bio"></p>
-            </div>
+            <h1 class="title">The Epic Story of Goofy Goober Industries</h1>
+            <p>Discover the quirky journey that revolutionized technology.</p>
         </div>
     </section>
     
 
-    <section id="timeline" class="timeline-section">
+    <!-- Story Timeline with Scroll-triggered Animations -->
+    <section id="lore-timeline" class="lore-timeline section-transition">
         <div class="container">
-            <h2 class="title">Lore Timeline</h2>
-            <div class="timeline">
-                <div class="timeline-item" data-aos="fade-right">
-                    <h3>1954 - Founding</h3>
-                    <p>The birth of Goofy Goober Industries, a small tech startup with big dreams.</p>
+            <h2 class="title">Our Story</h2>
+
+            <!-- Event 1 -->
+            <div class="lore-event" data-aos="fade-right">
+                <div class="event-content">
+                    <h3>1954: The Birth of Goofy Goober Industries</h3>
+                    <p>Our founder, EnderReaper64, had a vision: goofy tech meets serious innovation.</p>
                 </div>
-                <div class="timeline-item" data-aos="fade-left">
-                    <h3>1960 - Breakthrough</h3>
-                    <p>Development of the first AI-driven system: GooberTech, revolutionizing automation.</p>
+                <div class="event-image">
+                    <img src="./assets/lore1.png" alt="Founding Image">
                 </div>
-                <!-- More timeline items here -->
+            </div>
+
+            <!-- Event 2 -->
+            <div class="lore-event reverse" data-aos="fade-left">
+                <div class="event-content">
+                    <h3>1960: The First Breakthrough</h3>
+                    <p>Our AI, GooberTech, reshaped automation as we know it. Robots and ice cream? Why not?</p>
+                </div>
+                <div class="event-image">
+                    <img src="./assets/lore2.png" alt="AI Development">
+                </div>
+            </div>
+
+            <!-- Event 3 -->
+            <div class="lore-event" data-aos="fade-right">
+                <div class="event-content">
+                    <h3>2000: Goofy's Global Domination</h3>
+                    <p>By 2000, GGI had become a world leader, introducing GooberBots globally.</p>
+                </div>
+                <div class="event-image">
+                    <img src="./assets/lore3.png" alt="Global Leader">
+                </div>
             </div>
         </div>
     </section>
-    
-    <footer class="footer" id="contact">
+
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <p>&copy; <span id="date"></span> Goofy Goober Industries</p>
-            <a href="#top" class="top">Back to top</a>
+            <p>&copy; 2024 Goofy Goober Industries</p>
         </div>
     </footer>
+
+    <!-- Floating Action Button (FAB) -->
+    <div id="fab" class="fab show">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- External Scripts -->
+    <script src="script.js"></script>
     <script>
-        document.getElementById('date').textContent = new Date().getFullYear();
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
     </script>
 </body>
+
 </html>

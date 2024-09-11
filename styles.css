@@ -627,6 +627,104 @@ small {
     opacity: 1;
 }
 
+/* Mobile view adjustments */
+@media screen and (max-width: 768px) {
+    /* General adjustments */
+    :root {
+        --section-mt: 4rem;
+        font-size: 8px;
+    }
+
+    .togglecontainer {
+        width: 40px;
+        height: 40px;
+    }
+
+    .sun-logo, .moon-logo {
+        font-size: 20px;
+    }
+
+    .nav .container {
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+    }
+
+    .nav-links {
+        font-size: 1.2rem;
+    }
+
+    .social-nav {
+        margin-top: 1rem;
+    }
+
+    .hero .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .hero img {
+        max-width: 250px;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .about-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .about-text {
+        text-align: center;
+    }
+
+    .about-image img {
+        margin-top: 2rem;
+        max-width: 250px;
+    }
+
+    .projects {
+        gap: 6rem;
+    }
+
+    .project {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .project-links {
+        column-gap: 2rem;
+    }
+
+    .my-skills ul {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-us, .timeline-section, .projects-section {
+        padding: 2rem 1rem;
+    }
+
+    .faq-question, .faq-answer {
+        font-size: 1.2rem;
+    }
+
+    .loader .spinner {
+        width: 60px;
+        height: 60px;
+        border: 6px solid var(--secondary-clr);
+        border-top: 6px solid var(--accent-clr);
+    }
+}
+
+
+
 /***********************
     HERO TEXT SPACING FIX
 ************************/
